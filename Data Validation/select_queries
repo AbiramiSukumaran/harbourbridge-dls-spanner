@@ -1,0 +1,25 @@
+These queries can be executed in MySQL and Cloud Spanner:
+
+1. Row Count Validation for initial bulk load:
+
+select count(*) from cricket_db.dls;
+
+2. Row Count Validation for streaming data load:
+
+select count(*) from cricket_db.dls where innings_id = 2;
+
+2. Target Score Update Validation:
+
+select y.* ,  round(innings_1_runs * ((100 - innings_2_res) / 100)) as TARGET_SCORE_TEAM_2
+from (
+select x.*,
+(select RESOURCE_PERC from cricket_db.STD_DLS_RESOURCE where OVERS_LEFT = x.overs_left and WICKETS_LOST = x.wickets_lost) as innings_2_res
+from (
+SELECT a.match_name, a.current_innings,a.innings_id,a.overs 
+, (20-a.overs) as overs_left, (select count(wicket_id) from cricket_db.dls where wicket_id <> 0 and 
+innings_id = 2 and a.match_name = 'INDIA v PAK') as wickets_lost, 
+(select sum(runs) from cricket_db.dls where innings_id = 1 and match_name = 'INDIA v PAK') as innings_1_runs
+FROM cricket_db.dls a
+WHERE a.innings_id = 2 
+and a.match_name = 'INDIA v PAK' order by a.keynumber
+) as x ) as y;
