@@ -1,4 +1,4 @@
-# harbourbridge-dls-spanner
+# Minimal Downtime Migration to Spanner using HarbourBridge) project
 
 Welcome to the harbourbridge-dls-spanner (Minimal Downtime Migration to Spanner using HarbourBridge) project!
 
