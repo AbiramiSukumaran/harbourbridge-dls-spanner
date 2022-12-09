@@ -6,7 +6,7 @@ Insert all csv data into dls_src table:
       
       gcloud sql connect <<instance name>> --user=root --quiet
 
-2. Make sure the details.csv (https://github.com/AbiramiSukumaran/harbourbridge-dls-spanner/tree/main/MySQL/Data/details.csv) is saved and is
+2. Make sure the details.csv (https://github.com/AbiramiSukumaran/harbourbridge-dls-spanner/blob/main/MySQL/Data/details.csv) is saved and is
 accessible to the folder in command shell you are running the below command from.
 
 3.  Run the following command in Cloud shell MySQL prompt:
