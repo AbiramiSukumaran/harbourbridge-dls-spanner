@@ -1,0 +1,241 @@
+Insert all csv data into dls_src table:
+
+1. Open Google Cloud Shell from Cloud SQL overview page or command prompt if you have a local MySQL server.
+
+2. Connect to MySQL prompt. If you are using Cloud SQL for MySQL, use the folowing command:
+      
+      gcloud sql connect <<instance name>> --user=root --quiet
+
+2. Make sure the details.csv (https://github.com/AbiramiSukumaran/harbourbridge-dls-spanner/tree/main/MySQL/Data/details.csv) is saved and is
+accessible to the folder in command shell you are running the below command from.
+
+3.  Run the following command in Cloud shell MySQL prompt:
+
+LOAD DATA INFILE 'details.csv' INTO TABLE cricket_db.dls_src FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+
+4. Run the following command to load the same data into dls table
+
+LOAD DATA INFILE 'details.csv' INTO TABLE cricket_db.dls FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+
+5. Delete SECOND INNINGS portion of the data from dls table to perform streaming (simulation) for it from dls_src table for this use case:
+
+DELETE FROM cricket_db.dls WHERE INNINGS_ID=2;
+
+6. Insert scripts for STD_DLS_RESOURCE table. To understand what this data is about, refer to the README file in this repo root:
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (1, 20, 0, 100.0);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (2, 20, 1, 96.8);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (3, 20, 2, 92.6);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (4, 20, 3, 86.7);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (5, 20, 4, 78.8);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (6, 20, 5, 68.2);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (7, 20, 6, 54.4);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (8, 20, 7, 37.5);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (9, 20, 8, 21.3);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values (10, 20,9, 8.3);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	11	,	19	,	0	,	96.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	12	,	19	,	1	,	93.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	13	,	19	,	2	,	89.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	14	,	19	,	3	,	83.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	15	,	19	,	4	,	76.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	16	,	19	,	5	,	66.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	17	,	19	,	6	,	53.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	18	,	19	,	7	,	37.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	19	,	19	,	8	,	21	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	20	,	19	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	21	,	18	,	0	,	92.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	22	,	18	,	1	,	89.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	23	,	18	,	2	,	85.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	24	,	18	,	3	,	81.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	25	,	18	,	4	,	74.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	26	,	18	,	5	,	65	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	27	,	18	,	6	,	52.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	28	,	18	,	7	,	36.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	29	,	18	,	8	,	21	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	30	,	18	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	31	,	17	,	0	,	88.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	32	,	17	,	1	,	85.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	33	,	17	,	2	,	82.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	34	,	17	,	3	,	77.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	35	,	17	,	4	,	71.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	36	,	17	,	5	,	63.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	37	,	17	,	6	,	51.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	38	,	17	,	7	,	36.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	39	,	17	,	8	,	21	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	40	,	17	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	41	,	16	,	0	,	84.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	42	,	16	,	1	,	81.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	43	,	16	,	2	,	79	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	44	,	16	,	3	,	74.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	45	,	16	,	4	,	69.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	46	,	16	,	5	,	61.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	47	,	16	,	6	,	50.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	48	,	16	,	7	,	36.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	49	,	16	,	8	,	20.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	50	,	16	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	51	,	15	,	0	,	79.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	52	,	15	,	1	,	77.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	53	,	15	,	2	,	75.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	54	,	15	,	3	,	71.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	55	,	15	,	4	,	66.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	56	,	15	,	5	,	59.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	57	,	15	,	6	,	49.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	58	,	15	,	7	,	35.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	59	,	15	,	8	,	20.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	60	,	15	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	61	,	14	,	0	,	75.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	62	,	14	,	1	,	73.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	63	,	14	,	2	,	71.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	64	,	14	,	3	,	68	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	65	,	14	,	4	,	63.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	66	,	14	,	5	,	56.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	67	,	14	,	6	,	47.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	68	,	14	,	7	,	35.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	69	,	14	,	8	,	20.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	70	,	14	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	71	,	13	,	0	,	71	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	72	,	13	,	1	,	69.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	73	,	13	,	2	,	67.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	74	,	13	,	3	,	64.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	75	,	13	,	4	,	60.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	76	,	13	,	5	,	54.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	77	,	13	,	6	,	46.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	78	,	13	,	7	,	34.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	79	,	13	,	8	,	20.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	80	,	13	,	9	,	8.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	81	,	12	,	0	,	66.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	82	,	12	,	1	,	65	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	83	,	12	,	2	,	63.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	84	,	12	,	3	,	60.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	85	,	12	,	4	,	57.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	86	,	12	,	5	,	51.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	87	,	12	,	6	,	44.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	88	,	12	,	7	,	33.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	89	,	12	,	8	,	20.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	90	,	12	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	91	,	11	,	0	,	61.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	92	,	11	,	1	,	60.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	93	,	11	,	2	,	59	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	94	,	11	,	3	,	56.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	95	,	11	,	4	,	53.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	96	,	11	,	5	,	49.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	97	,	11	,	6	,	42.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	98	,	11	,	7	,	32.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	99	,	11	,	8	,	20.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	100	,	11	,	9	,	8.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	101	,	10	,	0	,	56.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	102	,	10	,	1	,	55.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	103	,	10	,	2	,	54.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	104	,	10	,	3	,	52.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	105	,	10	,	4	,	50	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	106	,	10	,	5	,	46.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	107	,	10	,	6	,	40.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	108	,	10	,	7	,	31.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	109	,	10	,	8	,	20.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	110	,	10	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	111	,	9	,	0	,	51.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	112	,	9	,	1	,	51.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	113	,	9	,	2	,	49.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	114	,	9	,	3	,	48.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	115	,	9	,	4	,	46.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	116	,	9	,	5	,	42.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	117	,	9	,	6	,	37.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	118	,	9	,	7	,	30.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	119	,	9	,	8	,	19.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	120	,	9	,	9	,	8.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	121	,	8	,	0	,	46.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	122	,	8	,	1	,	45.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	123	,	8	,	2	,	45.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	124	,	8	,	3	,	43.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	125	,	8	,	4	,	42	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	126	,	8	,	5	,	39.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	127	,	8	,	6	,	35.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	128	,	8	,	7	,	28.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	129	,	8	,	8	,	19.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	130	,	8	,	9	,	8.3	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	131	,	7	,	0	,	41.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	132	,	7	,	1	,	40.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	133	,	7	,	2	,	40.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	134	,	7	,	3	,	39.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	135	,	7	,	4	,	37.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	136	,	7	,	5	,	35.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	137	,	7	,	6	,	32.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	138	,	7	,	7	,	26.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	139	,	7	,	8	,	18.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	140	,	7	,	9	,	8.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	141	,	6	,	0	,	35.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	142	,	6	,	1	,	35.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	143	,	6	,	2	,	35	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	144	,	6	,	3	,	34.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	145	,	6	,	4	,	33.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	146	,	6	,	5	,	31.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	147	,	6	,	6	,	29	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	148	,	6	,	7	,	24.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	149	,	6	,	8	,	17.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	150	,	6	,	9	,	8.1	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	151	,	5	,	0	,	30.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	152	,	5	,	1	,	30	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	153	,	5	,	2	,	29.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	154	,	5	,	3	,	29.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	155	,	5	,	4	,	28.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	156	,	5	,	5	,	27.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	157	,	5	,	6	,	25.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	158	,	5	,	7	,	22.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	159	,	5	,	8	,	16.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	160	,	5	,	9	,	8.1	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	161	,	4	,	0	,	24.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	162	,	4	,	1	,	24.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	163	,	4	,	2	,	24.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	164	,	4	,	3	,	23.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	165	,	4	,	4	,	23.3	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	166	,	4	,	5	,	22.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	167	,	4	,	6	,	21.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	168	,	4	,	7	,	18.9	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	169	,	4	,	8	,	14.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	170	,	4	,	9	,	8	);
+
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	171	,	3	,	0	,	18.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	172	,	3	,	1	,	18.6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	173	,	3	,	2	,	18.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	174	,	3	,	3	,	18.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	175	,	3	,	4	,	18	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	176	,	3	,	5	,	17.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	177	,	3	,	6	,	16.8	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	178	,	3	,	7	,	15.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	179	,	3	,	8	,	12.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	180	,	3	,	9	,	7.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	181	,	2	,	0	,	12.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	182	,	2	,	1	,	12.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	183	,	2	,	2	,	12.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	184	,	2	,	3	,	12.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	185	,	2	,	4	,	12.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	186	,	2	,	5	,	12	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	187	,	2	,	6	,	11.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	188	,	2	,	7	,	11	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	189	,	2	,	8	,	9.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	190	,	2	,	9	,	6.5	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	191	,	1	,	0	,	6.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	192	,	1	,	1	,	6.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	193	,	1	,	2	,	6.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	194	,	1	,	3	,	6.4	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	195	,	1	,	4	,	6.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	196	,	1	,	5	,	6.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	197	,	1	,	6	,	6.2	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	198	,	1	,	7	,	6	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	199	,	1	,	8	,	5.7	);
+insert into cricket_db.STD_DLS_RESOURCE(KEYNUMBER, OVERS_LEFT, WICKETS_LOST, RESOURCE_PERC) values 	(	200	,	1	,	9	,	4.4	);
+
+
+
+
