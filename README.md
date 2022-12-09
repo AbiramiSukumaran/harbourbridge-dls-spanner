@@ -18,7 +18,7 @@ If you are wondering what a Resource Table is, imagine it being similar to a Log
 
 Source and Destination DB steps to remember:
 1. Install MySQL Server or use Google Cloud SQL for MySQL for the migration
-2. Create your source database and use the Source DDL to create source schema and objects (3 tables)
+2. Create your source database named "<b>cricket_db</b>" and use the Source DDL to create source schema and objects (3 tables)
 3. Execute the insert statements (Source DMLs) to create source data to dls_src and STD_DLS_RESOURCE table
 4. Execute the insert statements (Source DMLs) to create initial bulk data to dls table
 5. Save the Data Validation SELECT queries for post-migration validation in both MySQL and Spanner to ensure data-sync
